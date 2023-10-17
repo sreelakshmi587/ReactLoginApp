@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState } from "react";
+import AppRoutes from "./Core/AppRoutes";
+import { withProviders } from "./Context/Toast/withProvider";
+import { ToastContext } from "./Context/Toast/ToastContext";
+import Home from "./Modules/Pages/Home";
+import Favorites from "./Modules/Pages/Favourites";
 
 function App() {
+  const [favoriteCities, setFavoriteCities] = useState([]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <AppRoutes />{" "}
+      {/* <Home
+        favoriteCities={favoriteCities}
+        setFavoriteCities={setFavoriteCities}
+      />
+      <Favorites favoriteCities={favoriteCities} /> */}
+    </>
   );
 }
 
-export default App;
+export default withProviders(ToastContext)(App);

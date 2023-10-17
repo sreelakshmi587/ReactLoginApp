@@ -1,38 +1,274 @@
+
 .App {
-  text-align: center;
+  background: white ;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Auth-form-container {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: #76b852;
+  justify-content: center;
+  align-items: center;
+}
+.main-content {
+  flex-grow: 1;
+  display: flex
+}
+
+.Auth-form {
+  width: 420px;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  background: #f2f2f2
+  /* //background-color: white; */
+}
+
+.Auth-form-content {
+  padding-left: 12%;
+  padding-right: 12%;
+  background: #f2f2f2;
+
+}
+
+.Auth-form-title {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 28px;
+  color: rgb(47, 44, 44);
+  font-weight: 900;
+}
+
+.Auth-form-profile {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 24px;
+  color:#4CAF50;
+  font-weight: 800;
+}
+
+label {
+  font-size: 16px;
+  font-weight: 700;
+  color:#4CAF50;
+}
+.errorText{
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 1rem;
+  color: rgb(167, 27, 27);
+}
+
+.loginbutton {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 10px;
+  margin: 20px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 700;
+}
+.regherebutton{
+  background-color: none;
+  color: #4CAF50;
+  padding: 5px 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.editbutton{
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  margin: 20px 5px 20px 56px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 700;
+  display: 'flex';
+  justify-content: 'flex-end';
+}
+.deletebutton{
+  background-color: #e30c08;
+  color: white;
+  padding: 10px 20px;
+  margin: 20px 5px  ;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 700;
+  float: 'right';
+}
+.regherebutton:focus{
+  outline: none;
+}
+
+.formcontent {
+  background-color: #fefefe;
+  border: 1px solid #888;
+  width: 100%;
+  padding: 20px 20px;
+  border: none;
+}
+
+.dropdown-content{
+  background-color: #fefefe;
+  border: 1px solid #888;
+  width: 100%;
+  padding: 5px 20px;
+  border: none;
+}
+
+.countryColumn{
+  background-color:#5dc060;
+  border: 1px solid black;
+  width: fit-content;
+  padding:20px,50px,20px,50px;
+  border-radius: 10px;
+}
+
+.favorite-button {
+  background-color: rgb(223, 229, 114);
+  color: rgb(56, 54, 54);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  margin-left:50px ;
+  cursor: pointer;
+}
+
+.view-details-button {
+  background-color: rgb(129, 224, 116);
+  color: rgb(56, 54, 54);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.country-button {
+  background-color:transparent;
+  color: rgb(82, 79, 79);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.country-label{
+  color: black;
+  font-size: 27px;
+  font-weight: 700;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-left: 150px;
+  margin-top: 30px;
+}
+.city-label{
+  color: black;
+  font-size: 23px;
+  font-weight: 700;
+  align-items: center;
+  justify-content: center;
+  margin-left: 100px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.detailColumn {
+  background-color: #5dc060;
+  border: none;
+  width:max-content;
+  padding: 20px 50px; 
+  border-radius: 10px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  height: 100%; 
+  margin: auto; 
+  align-self: center; 
+  margin-right: 70px;
+  margin-left: 50px;
+  margin-top: 100px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.detail-label{
+  color: black;
+  font-size: 23px;
+  font-weight: 700;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
 }
+
+.detail-content{
+  color: black;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.table-container {
+  flex: 1; 
+  overflow: auto;
+  margin-left: 250px; 
+  margin-right: 200px;
+}
+
+.page-item {
+  margin-right: 5px; 
+}
+
+.page-link {
+  
+  background-color: #fff; 
+  border: 1px solid #5dc060; 
+  color: #5dc060;
+}
+
+.page-item.active .page-link {
+  background-color: #5dc060; 
+  color: #fff; 
+  border-color: #5dc060;
+}
+
+.table-with-border {
+  border: 2px solid #5dc060; 
+  border-collapse: collapse; 
+}
+
+.table-with-border th, .table-with-border td , .table-with-border tr{
+  border: 3px solid #5dc060; 
+  padding: 8px; 
+  text-align: left; 
+}
+
+
+.table-with-border thead {
+  background-color: #5dc060; 
+  color: #fff; 
+}
+
+.favorites-label{
+  color: black;
+  font-size: 30px;
+  font-weight: 800;
+  align-items: center;
+  justify-content: center;
+  margin-left: 550px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+
