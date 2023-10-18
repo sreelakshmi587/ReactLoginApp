@@ -44,10 +44,13 @@ const Register = (props) => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
-    localStorage.setItem("user", JSON.stringify(formValues));
-    setFormErrors(validate(formValues));
     setIsSubmit(true);
+    const errors = validate(formValues);
+    setFormErrors(errors);
+    if (Object.keys(errors).length === 0) {
+      console.log(e.target.value);
+      localStorage.setItem("user", JSON.stringify(formValues));
+    }
   };
 
   const fetchCountryData = async () => {
@@ -76,13 +79,15 @@ const Register = (props) => {
   }, [formErrors, isSubmit]);
 
   const handleChange = (e) => {
-    console.log(e.target.value);
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
-
-    const errors = validate({ ...formValues, [name]: value });
-    setFormErrors(errors);
+  
+    if (isSubmit) {
+      const errors = validate({ ...formValues, [name]: value });
+      setFormErrors(errors);
+    }
   };
+  
   console.log(props);
   return (
     <>

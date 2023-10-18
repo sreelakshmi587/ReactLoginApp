@@ -88,16 +88,16 @@ const Profile = () => {
   return (
     <>
       <div style={{ display: "flex" }}>
-      <Sidebar/>
+        <Sidebar />
         <div className="main-content">
           <div className="Auth-form-container">
-            <div>
+            <div style={{ display: "flex" }} >
               <form className="Auth-form">
                 <div className="Auth-form-content">
                   <h3 className="Auth-form-profile" color="#4CAF50">
                     User Details
                   </h3>
-
+  
                   <h3 className="Auth-form-title">Welcome {userName.name}</h3>
                   <div className="d-grid gap-2 mt-3">
                     <label>Email : </label>
@@ -141,21 +141,20 @@ const Profile = () => {
                   <div className="d-grid gap-2 mt-3">
                     <label>User Country : </label>
                     <select
-                className="dropdown-content form-control mt-1"
-                name="countryName"
-                style={{ color: "GrayText" }}
-                value={formValues.countryName}
-                onChange={handleChange}
-              >
-                {countryList?.map((country, i) => (
-                  <option value={country.name.official} key={i}>
-                    {country.name.official}
-                  </option>
-                ))}
-              </select>
-
+                      className="dropdown-content form-control mt-1"
+                      name="countryName"
+                      style={{ color: "GrayText" }}
+                      value={formValues.countryName}
+                      onChange={handleChange}
+                    >
+                      {countryList?.map((country, i) => (
+                        <option value={country.name.official} key={i}>
+                          {country.name.official}
+                        </option>
+                      ))}
+                    </select>
                   </div>
-
+  
                   <div className="d-grid gap-2 mt-3">
                     <ButtonToolbar>
                       <ButtonGroup>
@@ -165,7 +164,7 @@ const Profile = () => {
                           type="submit"
                           className="editbutton "
                           onClick={handleSave}
-                          disabled = {Object.keys(formErrors).length !== 0}
+                          disabled={Object.keys(formErrors).length !== 0}
                         >
                           Save Changes
                         </Button>
@@ -191,6 +190,7 @@ const Profile = () => {
       </div>
     </>
   );
+  
 };
 
 export default Profile;
