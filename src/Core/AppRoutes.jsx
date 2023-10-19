@@ -11,11 +11,6 @@ const AllRoutes = createBrowserRouter([
     {
         path: "/",
         element: <Login />,
-        // children: [
-        //   {
-        //     index: true,
-        //     element: <Login />,
-        //   },]
     },
     {
         path: "/profile",

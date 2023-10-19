@@ -7,7 +7,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 
 const Profile = () => {
-  const userName = JSON.parse(localStorage.getItem("user"));
+  const userName = JSON.parse(localStorage.getItem("currentUser"));
 
   const initialValues = { name: userName.name,email: userName.email, pswd: userName.pswd, countryName: userName.countryName, favoriteCities :userName.favoriteCities };
   const [formValues, setFormValues] = useState(initialValues);
@@ -71,7 +71,7 @@ const Profile = () => {
 
     setFormErrors(validate(formValues));
     if (Object.keys(validate(formValues)).length === 0) {
-      localStorage.setItem("user", JSON.stringify(formValues));
+      localStorage.setItem("currentUser", JSON.stringify(formValues));
       toast({ type: "success", text: "Update Successful !", timeout: 3000, toastId : "updateSuccess"  });
     } else {
       toast({ type: "error", text: "Update Failed", timeout: 3000, toastId : "updatefailed"});
@@ -80,7 +80,11 @@ const Profile = () => {
 
   const handleDelete = (e) =>{
     e.preventDefault();
-    localStorage.removeItem("user");
+    localStorage.removeItem("currentUser");
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const users = JSON.parse(localStorage.getItem("users"));
+    const updatedUsers = users.filter((user) => user.email !== currentUser.email);
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
     toast({ type: "error", text: "Account Deleted", timeout: 3000, toastId : "accountdelete"});
     navigation("/register");
   }
@@ -108,7 +112,6 @@ const Profile = () => {
                       className="formcontent form-control mt-1"
                       placeholder="user@gmail.com"
                       disabled
-                      //onChange={handleChange}
                       id="email"
                     />
                   </div>

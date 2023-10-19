@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { useToastDispatch } from "../../Context/Toast/ToastContext";
 
-//toast.configure();
 
 const Login = (props) => {
   const initialValues = { email: "", pswd: "" };
@@ -16,25 +15,21 @@ const Login = (props) => {
 
   const navigation = useNavigate();
   const toast = useToastDispatch();
-
   useEffect(() => {
     console.log(isSubmit);
     if (isSubmit && Object.keys(formErrors).length === 0) {
-      console.log(formValues);
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const foundUser = users.find(
+        (user) => user.email === formValues.email && user.pswd === formValues.pswd
+      );
 
-      const loggedUser = JSON.parse(localStorage.getItem("user"));
-      
-      console.log(loggedUser.email);
-      if (
-        formValues.email === loggedUser.email &&
-        formValues.pswd === loggedUser.pswd
-      ) {
-       toast({ type: "success", text: "Login Successful", timeout: 3000, toastId : "loginsuccess"  });
+      if (foundUser) {
+        localStorage.setItem("currentUser", JSON.stringify(foundUser));
+        toast({ type: "success", text: "Login Successful", timeout: 3000, toastId: "loginsuccess" });
         navigation("/home");
       } else {
-        toast({ type: "error", text: "Login Failed", timeout: 3000, toastId : "loginfailed"});
+        toast({ type: "error", text: "Login Failed", timeout: 3000, toastId: "loginfailed" });
       }
-      // navigation("/profile");
     }
   }, [formErrors, isSubmit]);
 
@@ -144,10 +139,7 @@ const Login = (props) => {
                 size="lg"
                 type="submit"
                 className="loginbutton "
-                // onClick={notify}
                 disabled={Object.keys(formErrors).length !== 0 && isSubmit}
-                //onSubmit={handleSubmit}
-                //onClick={() => navigation("/profile")}
               >
                 Log In
               </Button>{" "}

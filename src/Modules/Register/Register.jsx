@@ -49,7 +49,9 @@ const Register = (props) => {
     setFormErrors(errors);
     if (Object.keys(errors).length === 0) {
       console.log(e.target.value);
-      localStorage.setItem("user", JSON.stringify(formValues));
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      users.push(formValues);
+      localStorage.setItem("users", JSON.stringify(users));
     }
   };
 

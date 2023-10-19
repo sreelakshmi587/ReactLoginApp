@@ -26,31 +26,40 @@ const Home = () => {
     fetchCountries();
   }, []);
 
-  useEffect(()=>{
-    const user = JSON.parse(localStorage.getItem("user"));
-    setFavoriteCities(user.favoriteCities);
-  },[selectedCountry])
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
+    const favoriteCities = currentUser.favoriteCities || [];
+    setFavoriteCities(favoriteCities);
+  }, [selectedCountry]);
 
   const handleCountryClick = (country) => {
     setSelectedCountry(country);
   };
 
   const toggleFavoriteCity = (city) => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    let updatedFavoriteCities = [];
-  
-    if (user.favoriteCities?.includes(city)) {
-      updatedFavoriteCities = user.favoriteCities.filter((c) => c !== city);
-    } else {
-      updatedFavoriteCities = [...user.favoriteCities, city];
+    if (selectedCountry && selectedCountry.country) {
+      let users = JSON.parse(localStorage.getItem("users"));
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      const favoriteCities = currentUser.favoriteCities || [];
+
+      if (favoriteCities.includes(city)) {
+        currentUser.favoriteCities = favoriteCities.filter((c) => c !== city);
+      } else {
+        currentUser.favoriteCities = [...favoriteCities, city];
+      }
+      setFavoriteCities(currentUser.favoriteCities);
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      users = users.map((user) => {
+        if (user.email == currentUser.email) {
+          console.log(currentUser.favoriteCities);
+
+          return { ...user, favoriteCities: currentUser.favoriteCities };
+        } else return user;
+      });
+      localStorage.setItem("users", JSON.stringify(users));
     }
-  
-    user.favoriteCities = updatedFavoriteCities;
-    localStorage.setItem("user", JSON.stringify(user));
-  
-    setFavoriteCities(updatedFavoriteCities);
   };
-  
+
   const handleCityDetails = (city) => {
     setSelectedCity(city);
   };
@@ -71,8 +80,8 @@ const Home = () => {
               style={{ maxHeight: maxHeight, overflowY: "scroll" }}
             >
               <ol>
-                {countries.map((country) => (
-                  <li key={country.country}>
+                {countries.map((country, index) => (
+                  <li key={index}>
                     <button
                       className="country-button"
                       onClick={() => handleCountryClick(country)}
@@ -90,68 +99,73 @@ const Home = () => {
                 <h3 className="city-label">
                   {selectedCountry.country} - Cities
                 </h3>
-                <table>
-                  <tbody>
-                    <div style={{ maxHeight: maxHeight, overflowY: "auto" }}>
-                      <ul>
-                        {selectedCountry.cities.map((city) => (
-                          <tr key={city}>
-                            <td>{city}</td>
-                            <td>
-                              <button
-                                className="favorite-button"
-                                onClick={() => toggleFavoriteCity(city)}
-                              >
-                                {favoriteCities.includes(city)
-                                  ? "Remove from Favorites"
-                                  : "Mark as Favorite"}
-                              </button>
-                            </td>
-                            <td>
-                              <button
-                                className="view-details-button"
-                                onClick={() => handleCityDetails(city)}
-                              >
-                                View Details
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
-                      </ul>
-                    </div>
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-          {selectedCity && (
-            <div className="detailColumn" style={{ flex: 1 }}>
-              <div style={{ border: "1px solid transparent" }}>
-                <h1 className="detail-label">About - {selectedCity}</h1>
-                {selectedCountry && (
-                  <div >
+                <div className="row align-items-start">
+                  <div className="col-6">
                     <table>
-                      <tbody className="detail-content">
-                        <tr>
-                            <td>Country </td>
-                            <td> : {selectedCountry.country}</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Country Code
-                            </td>
-                            <td>
-                                : {selectedCountry.iso3}
-                            </td>
-                        </tr>
-                        
+                      <tbody>
+                        <div
+                          style={{ maxHeight: maxHeight, overflowY: "auto" }}
+                        >
+                          <ul>
+                            {selectedCountry.cities.map((city, index) => (
+                              <tr key={index}>
+                                <td>{city}</td>
+                                <td>
+                                  <button
+                                    className="favorite-button"
+                                    onClick={() => toggleFavoriteCity(city)}
+                                  >
+                                    {favoriteCities.includes(city)
+                                      ? "Remove from Favorites"
+                                      : "Mark as Favorite"}
+                                  </button>
+                                </td>
+                                <td>
+                                  <button
+                                    className="view-details-button"
+                                    onClick={() => handleCityDetails(city)}
+                                  >
+                                    View Details
+                                  </button>
+                                </td>
+                              </tr>
+                            ))}
+                          </ul>
+                        </div>
                       </tbody>
                     </table>
                   </div>
-                )}
+                  <div className="col-6">
+                    {selectedCity && (
+                      <div className="detailColumn" style={{ flex: 1 }}>
+                        <div style={{ border: "1px solid transparent" }}>
+                          <h1 className="detail-label">
+                            About - {selectedCity}
+                          </h1>
+                          {selectedCountry && (
+                            <div>
+                              <table>
+                                <tbody className="detail-content">
+                                  <tr>
+                                    <td>Country </td>
+                                    <td> : {selectedCountry.country}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Country Code</td>
+                                    <td>: {selectedCountry.iso3}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>
