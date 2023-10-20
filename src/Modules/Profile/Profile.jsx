@@ -72,6 +72,13 @@ const Profile = () => {
     setFormErrors(validate(formValues));
     if (Object.keys(validate(formValues)).length === 0) {
       localStorage.setItem("currentUser", JSON.stringify(formValues));
+      let users = JSON.parse(localStorage.getItem("users"));
+      users = users.map((user) => {
+        if (user.email == userName.email) {
+          return { ...user, name : formValues.name,pswd:formValues.pswd,countryName:formValues.countryName };
+        } else return user;
+      });
+      localStorage.setItem("users", JSON.stringify(users));
       toast({ type: "success", text: "Update Successful !", timeout: 3000, toastId : "updateSuccess"  });
     } else {
       toast({ type: "error", text: "Update Failed", timeout: 3000, toastId : "updatefailed"});
@@ -163,10 +170,10 @@ const Profile = () => {
                       <ButtonGroup>
                         <Button
                           variant="success"
-                          size="lg"
+                          size="md"
                           type="submit"
                           className="editbutton "
-                          onClick={handleSave}
+                          onClick={e => handleSave(e)}
                           disabled={Object.keys(formErrors).length !== 0}
                         >
                           Save Changes
