@@ -51,8 +51,6 @@ const Home = () => {
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
       users = users.map((user) => {
         if (user.email == currentUser.email) {
-          console.log(currentUser.favoriteCities);
-
           return { ...user, favoriteCities: currentUser.favoriteCities };
         } else return user;
       });

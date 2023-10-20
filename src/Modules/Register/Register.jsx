@@ -7,7 +7,6 @@ const initialValues = { name: "", email: "", pswd: "", countryName: "",favoriteC
 
 const Register = (props) => {
   const [formValues, setFormValues] = useState(initialValues);
-
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const [countryList, setcountryList] = useState([{ name: "", id: "" }]);
@@ -62,7 +61,6 @@ const Register = (props) => {
         throw new Error("Something went wrong!");
       }
       const data = await response.json();
-      console.log(data);
       setcountryList(data);
     } catch (error) {
       console.log(error);
@@ -73,7 +71,6 @@ const Register = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(isSubmit);
     if (isSubmit && Object.keys(formErrors).length === 0) {
       toast({ type: "success", text: "Registered Successful", timeout: 3000, toastId : "regsuccess"  });
       navigation("/login");
@@ -90,7 +87,6 @@ const Register = (props) => {
     }
   };
   
-  console.log(props);
   return (
     <>
       <div className="Auth-form-container">

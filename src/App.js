@@ -7,15 +7,9 @@ import Home from "./Modules/Pages/Home";
 import Favorites from "./Modules/Pages/Favourites";
 
 function App() {
-  const [favoriteCities, setFavoriteCities] = useState([]);
   return (
     <>
       <AppRoutes />{" "}
-      {/* <Home
-        favoriteCities={favoriteCities}
-        setFavoriteCities={setFavoriteCities}
-      />
-      <Favorites favoriteCities={favoriteCities} /> */}
     </>
   );
 }

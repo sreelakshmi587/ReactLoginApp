@@ -39,7 +39,6 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
                     <a className="page-link" 
                         onClick={goToNextPage}
                         >
-                        
                         Next
                     </a>
                 </li>

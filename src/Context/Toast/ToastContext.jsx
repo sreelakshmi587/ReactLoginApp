@@ -12,11 +12,6 @@ export const useToastDispatch = () => {
 }
 
 export const ToastContext = ({ children }) => {
-    
-    // options -> { timeout : 7000 } || { timeout: false }
-    // change autoClose timeout by specifing secs in 'timeout' key 
-    // default value is 5 secs & if no mention of timeout default value will applied
-    // if {timeout = false} toast won't hide until manually close 
 
     const showToast = ({text, type, timeout, toastId}) => {
 
